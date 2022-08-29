@@ -40,8 +40,8 @@ route.post('/', async (req, res) => {
       },
     )
 
-    res.cookie('refreshToken', refreshToken)
-    res.cookie('accessToken', accessToken)
+    res.cookie('refreshToken', refreshToken, { signed: true })
+    res.cookie('accessToken', accessToken, { signed: true })
 
     res.send({ username: exist.username, email })
   } catch (err) {
@@ -51,9 +51,13 @@ route.post('/', async (req, res) => {
 })
 
 route.get('/', (req, res) => {
-  const accessToken = req.cookies.accessToken
-  const refreshToken = req.cookies.refreshToken
-  const googleToken = req.cookies["connect.sid"]
+  console.log('req:', req)
+  // const accessToken = req.cookies.accessToken
+  // const refreshToken = req.cookies.refreshToken
+  const googleToken = req.signedCookies["connect.sid"]
+  const accessToken = req.signedCookies['accessToken']
+  const refreshToken = req.signedCookies['refreshToken']
+
 
   if (!accessToken || !refreshToken) {
     return res.status(401).send({ error: 'authorization failed' })

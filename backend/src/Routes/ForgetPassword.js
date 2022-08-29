@@ -29,6 +29,8 @@ route.post('/', async (req, res) => {
     res.status(500).send({ error: 'cant able to send link' })
   }
 })
+
+
 route.post('/reset', async (req, res) => {
   const { password, token } = req.body
   //   console.log(password, 'password')

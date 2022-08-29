@@ -14,6 +14,7 @@ route.post('/', (req, res) => {
   try {
     res.clearCookie('refreshToken')
     res.clearCookie('accessToken')
+    res.clearCookie('connect.sid')
     // req.session = null
     res.status(200).send({ message: 'successfully Loggedout' })
   } catch (e) {

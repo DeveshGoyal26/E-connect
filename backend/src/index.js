@@ -94,7 +94,7 @@ io.on('connection', (socket) => {
 
 })
 
-app.use(cookieParser());
+app.use(cookieParser(process.env.SESSION_SECRET));
 
 app.use(
   session({
@@ -131,7 +131,7 @@ app.use('/forgotpassword', ForgotPassword)
 
 server.listen(port, async (err, res) => {
   try {
-    await Connection
+    Connection
     console.log('Connected Successfully')
   } catch (err) {
     console.log(err)
