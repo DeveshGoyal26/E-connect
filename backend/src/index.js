@@ -115,7 +115,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'https://e-connect-zeta.vercel.app', 'https://e-connect-app.herokuapp.com'],
+    origin: ['http://localhost:3000', 'https://e-connect-zeta.vercel.app', 'http://localhost:8080'],
     credentials: true,
   }),
 )
@@ -140,5 +140,5 @@ server.listen(port, async (err, res) => {
   if (err) {
     return console.log('Something went wrong')
   }
-  console.log('Sever is live at https://e-connect-app.herokuapp.com')
+  console.log('Sever is live at http://localhost:8080')
 })

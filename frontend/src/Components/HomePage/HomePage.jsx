@@ -392,7 +392,7 @@ const HomePage = () => {
             <div className="flex flex-col items-center p-4 border sm:p-6 rounded-xl dark:border-gray-700">
               <img
                 className="object-cover w-full rounded-xl aspect-square"
-                src="https://media-exp1.licdn.com/dms/image/C4D03AQEnIuU68UGswg/profile-displayphoto-shrink_800_800/0/1653888389770?e=1664409600&v=beta&t=zxWUxg1l7Y7Wt-hddwNzrzQYzjsZkwamjgdU5Ijxx6I"
+                src="https://media-exp1.licdn.com/dms/image/C4D03AQGihHWhUnow9w/profile-displayphoto-shrink_800_800/0/1660990563483?e=1667433600&v=beta&t=5OobQaL1MVbVV3msmc91ExzsSanYhXqJV7KEgzEif7E"
                 alt=""
               />
 

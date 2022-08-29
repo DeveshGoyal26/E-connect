@@ -18,7 +18,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       const data = await axios.post(
-        "https://e-connect-app.herokuapp.com/logout",
+        "http://localhost:8080/logout",
         {},
         {
           credentials: "include",

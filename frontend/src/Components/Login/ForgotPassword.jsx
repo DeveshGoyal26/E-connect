@@ -10,7 +10,7 @@ const ForgotPassword = (e) => {
     }
     try {
       const data = await axios.post(
-        "https://e-connect-app.herokuapp.com/forgotPassword",
+        "http://localhost:8080/forgotPassword",
         form
       );
       if (data.data) {

@@ -31,7 +31,7 @@ function App() {
 
   const handleLogin = async () => {
     try {
-      const data = await axios.get('https://e-connect-app.herokuapp.com/login',
+      const data = await axios.get('http://localhost:8080/login',
         {
           withCredentials: true,
           credentials: 'include',

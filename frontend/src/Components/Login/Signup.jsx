@@ -9,6 +9,7 @@ const Signup = () => {
   const [isLogin, setIsLogin] = useState({});
   const notify = (msg) => toast(msg);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState("password");
 
   const signupHandler = async (e) => {
     e.preventDefault();
@@ -27,14 +28,10 @@ const Signup = () => {
     }
 
     try {
-      const data = await axios.post(
-        "https://e-connect-app.herokuapp.com/signup",
-        form,
-        {
-          credentials: "include",
-          withCredentials: true,
-        }
-      );
+      const data = await axios.post("http://localhost:8080/signup", form, {
+        credentials: "include",
+        withCredentials: true,
+      });
 
       setIsLogin(data.data);
       notify("login successfull");
@@ -129,16 +126,37 @@ const Signup = () => {
                       </label>
                     </div>
 
-                    <input
-                      type="password"
-                      name="password"
-                      id="password"
-                      onChange={(e) =>
-                        setForm({ ...form, [e.target.name]: e.target.value })
-                      }
-                      placeholder="Your Password"
-                      className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-                    />
+                    <div className="flex items-center ">
+                      <input
+                        type={showPassword}
+                        name="password"
+                        id="password"
+                        onChange={(e) =>
+                          setForm({ ...form, [e.target.name]: e.target.value })
+                        }
+                        placeholder="Your Password"
+                        className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                      />
+                      {showPassword == "password" ? (
+                        <i
+                          className="fa-solid fa-eye -ml-8 mt-2 cursor-pointer"
+                          onClick={() =>
+                            setShowPassword((prev) =>
+                              prev == "password" ? "text" : "password"
+                            )
+                          }
+                        ></i>
+                      ) : (
+                        <i
+                          className="fa-solid fa-eye-slash -ml-8 mt-2 cursor-pointer"
+                          onClick={() =>
+                            setShowPassword((prev) =>
+                              prev == "password" ? "text" : "password"
+                            )
+                          }
+                        ></i>
+                      )}
+                    </div>
                   </div>
                   <div className="mt-6">
                     <div className="flex justify-between mb-2">

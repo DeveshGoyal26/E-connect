@@ -11,7 +11,7 @@ route.post('/', async (req, res) => {
     return res.status(401).send({ error: 'please provide all the fields' })
   }
   try {
-    const exist = await userModel.findOne({ email })
+    const exist = await userModel.findOne({ email });
 
     if (!exist) {
       return res.status(401).send({
@@ -40,12 +40,12 @@ route.post('/', async (req, res) => {
       },
     )
 
-    res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: false, sameSite: "none" })
-    res.cookie('accessToken', accessToken, { httpOnly: true, secure: false, sameSite: "none" })
+    res.cookie('refreshToken', refreshToken)
+    res.cookie('accessToken', accessToken)
 
     res.send({ username: exist.username, email })
-  } catch (e) {
-    console.log('e:', e)
+  } catch (err) {
+    console.log('err:', err)
     res.status(500).send({ error: 'something wrong in login' })
   }
 })
