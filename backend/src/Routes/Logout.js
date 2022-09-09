@@ -12,9 +12,9 @@ route.post('/', (req, res) => {
   }
   // console.log("ikkade")
   try {
-    res.clearCookie('refreshToken')
-    res.clearCookie('accessToken')
-    res.clearCookie('connect.sid')
+    // res.clearCookie('refreshToken')
+    // res.clearCookie('accessToken')
+    // res.clearCookie('connect.sid')
     // req.session = null
     res.status(200).send({ message: 'successfully Loggedout' })
   } catch (e) {

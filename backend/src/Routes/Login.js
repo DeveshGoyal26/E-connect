@@ -7,6 +7,7 @@ const setCookie = require('set-cookie-parser');
 const route = Router()
 
 route.post('/', async (req, res) => {
+  console.log('req:', req)
   const { username, email, password } = req.body
   if (!email || !password) {
     return res.status(401).send({ error: 'please provide all the fields' })
@@ -41,8 +42,8 @@ route.post('/', async (req, res) => {
       },
     )
 
-    res.cookie('refreshToken', refreshToken, { signed: true, domain: "https://e-connect-zeta.vercel.app", path: '/login', secure: true })
-    res.cookie('accessToken', accessToken, { signed: true, domain: "https://e-connect-zeta.vercel.app", path: '/login', secure: true })
+    res.cookie('refreshToken', refreshToken, { signed: true, domain: "vercel.app", secure: true })
+    res.cookie('accessToken', accessToken, { signed: true, domain: "vercel.app", secure: true })
 
     res.send({ username: exist.username, email })
   } catch (err) {

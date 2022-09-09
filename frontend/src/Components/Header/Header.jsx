@@ -16,20 +16,20 @@ const Header = () => {
   const { login } = useContext(AuthContext);
 
   const handleLogout = async () => {
-    try {
-      const data = await axios.post(
-        "http://localhost:8080/logout",
-        {},
-        {
-          credentials: "include",
-          withCredentials: true,
-        }
-      );
-      console.log(data.data, "logout");
-      Navigate("/login");
-    } catch (e) {
-      console.log(e);
-    }
+    // try {
+    //   const data = await axios.post(
+    //     "http://localhost:8080/logout",
+    //     {},
+    //     {
+    //       credentials: "include",
+    //       withCredentials: true,
+    //     }
+    //   );
+    //   console.log(data.data, "logout");
+    //   Navigate("/login");
+    // } catch (e) {
+    //   console.log(e);
+    // }
   };
 
   function useOutsideAlerter(ref) {
