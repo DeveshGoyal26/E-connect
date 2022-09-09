@@ -2,6 +2,7 @@ const { Router } = require('express')
 const userModel = require('../models/User')
 const jwt = require('jsonwebtoken')
 const argon2 = require('argon2')
+const setCookie = require('set-cookie-parser');
 
 const route = Router()
 
@@ -40,8 +41,8 @@ route.post('/', async (req, res) => {
       },
     )
 
-    res.cookie('refreshToken', refreshToken, { signed: true })
-    res.cookie('accessToken', accessToken, { signed: true })
+    res.cookie('refreshToken', refreshToken, { signed: true, domain: "https://e-connect-zeta.vercel.app", path: '/login', secure: true })
+    res.cookie('accessToken', accessToken, { signed: true, domain: "https://e-connect-zeta.vercel.app", path: '/login', secure: true })
 
     res.send({ username: exist.username, email })
   } catch (err) {
@@ -51,7 +52,7 @@ route.post('/', async (req, res) => {
 })
 
 route.get('/', (req, res) => {
-  console.log('req:', req)
+  // console.log('req:', req)
   // const accessToken = req.cookies.accessToken
   // const refreshToken = req.cookies.refreshToken
   const googleToken = req.signedCookies["connect.sid"]
