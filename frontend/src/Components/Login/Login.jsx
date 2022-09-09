@@ -26,10 +26,14 @@ const Login = () => {
     }
 
     try {
-      const data = await axios.post("http://localhost:8080/login", form, {
-        credentials: "include",
-        withCredentials: true,
-      });
+      const data = await axios.post(
+        "https://e-connect-app.herokuapp.com/login",
+        form,
+        {
+          credentials: "include",
+          withCredentials: true,
+        }
+      );
 
       setLogin(data.data);
       notify("login successfull");
@@ -167,7 +171,7 @@ const Login = () => {
                   </div>
 
                   <a
-                    href="http://localhost:8080/auth/google"
+                    href="https://e-connect-app.herokuapp.com/auth/google"
                     className="flex items-center justify-center mt-4 text-gray-600 transition-colors duration-200 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
                   >
                     <div className="px-4 py-2">

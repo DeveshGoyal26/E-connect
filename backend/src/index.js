@@ -6,7 +6,7 @@ const { Server } = require('socket.io')
 const cookieParser = require('cookie-parser')
 const Login = require('./Routes/Login')
 const Signup = require('./Routes/Signup')
-const session = require("express-session");
+const session = require('express-session')
 require('dotenv').config()
 const app = express()
 const server = http.createServer(app)
@@ -96,14 +96,29 @@ io.on('connection', (socket) => {
 
 app.use(cookieParser(process.env.SESSION_SECRET));
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    maxAge: 24 * 60 * 60 * 100,
-  })
-);
+// app.use(
+//   session({
+//     key: 'express.sessionID',
+//     name: 'unique',
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       maxAge: 1000 * 60 * 60 * 48,
+//       httpOnly: true,
+//       secure: true,
+//       sameSite: "none",
+//       domain: 'localhost'
+//     }
+//   })
+// );
+
+app.use(session({
+  secret: 'keyboard cat',
+  name: "sessionTest",
+  resave: false,
+  saveUninitialized: true,
+}))
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -123,7 +138,7 @@ app.use(
 app.get('/', (req, res) => {
   res.send('Welcome')
 })
-app.use("/auth", authRoute);
+// app.use("/auth", authRoute);
 app.use('/login', Login)
 app.use('/signup', Signup)
 app.use('/logout', Logout)

@@ -7,7 +7,6 @@ const setCookie = require('set-cookie-parser');
 const route = Router()
 
 route.post('/', async (req, res) => {
-  console.log('req:', req)
   const { username, email, password } = req.body
   if (!email || !password) {
     return res.status(401).send({ error: 'please provide all the fields' })
@@ -42,10 +41,25 @@ route.post('/', async (req, res) => {
       },
     )
 
-    res.cookie('refreshToken', refreshToken, { signed: true, httpOnly: true, domain: "", secure: true, sameSite: false })
-    res.cookie('accessToken', accessToken, { signed: true, httpOnly: true, domain: "", secure: true, sameSite: false })
+    // res.cookie('refreshToken', refreshToken, { signed: true, httpOnly: true, domain: ".domain.com", secure: true, sameSite: false, maxAge: 2592000 })
+    // res.cookie('accessToken', accessToken, { signed: true, httpOnly: true, domain: ".domain.com", secure: true, sameSite: false, maxAge: 2592000 })
 
-    res.send({ username: exist.username, email })
+    req.session.regenerate(function (err) {
+      if (err) next(err)
+
+      // store user information in session, typically a user id
+      req.session.accessToken = accessToken
+      req.session.refreshToken = refreshToken
+
+      // save the session before redirection to ensure page
+      // load does not happen before session is saved
+      req.session.save(function (err) {
+        if (err) return next(err)
+        // res.redirect('/')
+        res.send({ username: exist.username, email })
+      })
+    })
+
   } catch (err) {
     console.log('err:', err)
     res.status(500).send({ error: 'something wrong in login' })
@@ -53,12 +67,15 @@ route.post('/', async (req, res) => {
 })
 
 route.get('/', (req, res) => {
-  // console.log('req:', req)
+  console.log('req:', req.sessionStore.sessions)
   // const accessToken = req.cookies.accessToken
   // const refreshToken = req.cookies.refreshToken
   const googleToken = req.signedCookies["connect.sid"]
-  const accessToken = req.signedCookies['accessToken']
-  const refreshToken = req.signedCookies['refreshToken']
+  // const accessToken = req.signedCookies['accessToken']
+  // const refreshToken = req.signedCookies['refreshToken']
+  const refreshToken = req.session.refreshToken
+  const accessToken = req.session.accessToken
+
 
 
   if (!accessToken || !refreshToken) {

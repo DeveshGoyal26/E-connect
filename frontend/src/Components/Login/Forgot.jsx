@@ -10,7 +10,7 @@ const Forgot = () => {
   const handleVerify = async () => {
     try {
       const data = await axios.post(
-        `http://localhost:8080/forgotpassword/${id}`
+        `https://e-connect-app.herokuapp.com/forgotpassword/${id}`
       );
       if (!data.data) {
         navigate("/signup");
@@ -31,7 +31,7 @@ const Forgot = () => {
 
     try {
       const data = await axios.post(
-        "http://localhost:8080/forgotpassword/reset",
+        "https://e-connect-app.herokuapp.com/forgotpassword/reset",
         {
           ...form,
           token: id,
