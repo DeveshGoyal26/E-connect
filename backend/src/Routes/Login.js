@@ -42,8 +42,8 @@ route.post('/', async (req, res) => {
       },
     )
 
-    res.cookie('refreshToken', refreshToken, { signed: true, domain: "vercel.app", secure: true })
-    res.cookie('accessToken', accessToken, { signed: true, domain: "vercel.app", secure: true })
+    res.cookie('refreshToken', refreshToken, { signed: true, httpOnly: true, domain: "", secure: true })
+    res.cookie('accessToken', accessToken, { signed: true, httpOnly: true, domain: "", secure: true })
 
     res.send({ username: exist.username, email })
   } catch (err) {
